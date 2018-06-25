@@ -55,15 +55,12 @@ for g1 in payments:
 				g1[1] = g1[0]
 				g1[0] = tempName
 				g1[2] = -g1[2]
-			
-			# Remove 0 payments
-			if g1[2] == 0:
-				payments.remove(g1)
 
 # Print payments
 print("\n---Pre-optimized:")
 for group in payments:
-	print(group[0] + " pays " + group[1] + ": $" + str(group[2]))
+	if group[2] != 0: # If not blank
+		print(group[0] + " pays " + group[1] + ": $" + str(group[2]))
 
 # Optimize for tri-relationships
 # Where: X owes Y, Y owes Z, X owes Z
@@ -73,11 +70,17 @@ for g1 in payments:
 			# If X owes Y, Y owes Z, X owes Z
 			if g1[0] == g3[0] and g1[1] == g2[0] and g2[1] == g3[1]:
 				# If first costs less than second
-				if g1[2] < g2[2]:
+				if g1[2] <= g2[2]:
 					g2[2] -= g1[2]		# Decrease payment
 					g3[2] += g1[2]		# Increase payment
 					g1[2] = 0			# Set to 0
-					payments.remove(g1)	# Remove now-empty payment
+					# payments.remove(g1)	# Remove now-empty payment
+				
+				# If first cost more than second
+				if g1[2] >= g2[2]:
+					g1[2] -= g2[2]	# Decrease payment
+					g3[2] += g2[2]	# Increase payment
+					g2[2] = 0 		# Set to 0
 
 # Optimize for bi-relationships
 # Where: X owes Y and Z owes X
@@ -91,6 +94,7 @@ for g1 in payments:
 # Print payments
 print("\n---Optimized:")
 for group in payments:
-	print(group[0] + " pays " + group[1] + ": $" + str(round(group[2])))
+	if group[2] != 0: # If not blank
+		print(group[0] + " pays " + group[1] + ": $" + str(round(group[2])))
 
 print("\n")
