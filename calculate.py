@@ -23,15 +23,17 @@ for n1 in names:
 			payments.append(group)
 
 # Analyze each transaction
+total = 0
 print("\n\n---Transactions:")
 for transaction in allTransactions:
-	item = transaction.pop(0)		# Get item
-	cost = int(transaction.pop())	# Get total cost
-	people = len(transaction) 		# Get number of people involved
+	item = transaction.pop(0)			# Get item
+	cost = float(transaction.pop())		# Get total cost
+	people = len(transaction) 			# Get number of people involved
 	costPer = round(cost / people, 2)	# Get cost per person
-	owner = transaction.pop(0) 		# Get who paid
+	owner = transaction.pop(0) 			# Get who paid
 
 	print(item + ", $" + str(cost))
+	total += cost
 
 	# Loop through payments and add to cost
 	for name in transaction:
@@ -39,6 +41,9 @@ for transaction in allTransactions:
 				# Find [Pays, To, Amount] that matches
 				if group[0] == name and group[1] == owner:
 					group[2] += costPer	# Add cost
+
+# Print total
+print("total: $"+str(total))
 
 # Settle between eachother
 # If x owes y and y owes x, settle
@@ -95,6 +100,6 @@ for g1 in payments:
 print("\n---Optimized:")
 for group in payments:
 	if group[2] != 0: # If not blank
-		print(group[0] + " pays " + group[1] + ": $" + str(round(group[2])))
+		print(group[0] + " pays " + group[1] + ": $" + str(round(group[2],2)))
 
 print("\n")
