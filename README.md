@@ -1,5 +1,10 @@
 # PaymentSplit
-Splitting of group expenses in Python.
+Splitting of group expenses.
+
+# Why
+[https://kittysplit.com/excel/hwwrkvMXC04K9Oo9QU1WK8JlA30dpnhR-2](https://kittysplit.com/excel/hwwrkvMXC04K9Oo9QU1WK8JlA30dpnhR-2)
+
+[billzer.com/my/e23cafacdfc5adcb3f1e084c2bccbfbc](billzer.com/my/e23cafacdfc5adcb3f1e084c2bccbfbc)
 
 
 ## How to format input.txt
