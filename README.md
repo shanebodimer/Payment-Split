@@ -2,10 +2,14 @@
 Splitting of group expenses.
 
 # Why
-[https://kittysplit.com/excel/hwwrkvMXC04K9Oo9QU1WK8JlA30dpnhR-2](https://kittysplit.com/excel/hwwrkvMXC04K9Oo9QU1WK8JlA30dpnhR-2)
+Because...
 
-[billzer.com/my/e23cafacdfc5adcb3f1e084c2bccbfbc](billzer.com/my/e23cafacdfc5adcb3f1e084c2bccbfbc)
+* [https://kittysplit.com/excel/hwwrkvMXC04K9Oo9QU1WK8JlA30dpnhR-2](https://kittysplit.com/excel/hwwrkvMXC04K9Oo9QU1WK8JlA30dpnhR-2)
+* [billzer.com/my/e23cafacdfc5adcb3f1e084c2bccbfbc](billzer.com/my/e23cafacdfc5adcb3f1e084c2bccbfbc)
+* [Excel-Tactics.xlsx](https://github.com/shanebodimer/PaymentSplit/blob/master/Excel-Tactics.xlsx)
+* [https://shortreckonings.com/GHWGQJN7](https://shortreckonings.com/GHWGQJN7)
 
+...are all different.
 
 ## How to format input.txt
 The first line should be the first names of all involved, seperated by a space.

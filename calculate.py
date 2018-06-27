@@ -1,8 +1,13 @@
+import sys
+
 # Store all transactions
 allTransactions = []
 
+# Get parameters
+fileName = sys.argv[1]
+
 # Get data
-with open('input.txt','r') as f:
+with open(fileName,'r') as f:
 	for line in f:							# For each line in file
 		transaction = []					# Array to store transaction
 		for word in line.split():			# Break down by word
