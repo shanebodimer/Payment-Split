@@ -1,5 +1,0 @@
-aaron brian craig david eddie frank george henry
-pizza 212.25 david aaron brian craig frank george henry 
-drinks 145 frank brian craig
-supplies 132.34 frank eddie george henry 
-misc 25 aaron david
