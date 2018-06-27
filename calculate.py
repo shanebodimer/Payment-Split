@@ -2,6 +2,17 @@
 import sys
 fileName = sys.argv[1]
 
+# Colors for printing
+class colors:
+    PURPLE = '\033[95m'
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    END = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 # Get data from file and store in transactions array
 allTransactions = []
 with open(fileName,'r') as f:
@@ -11,9 +22,8 @@ with open(fileName,'r') as f:
 			transaction.append(word)		# Append to array
 		allTransactions.append(transaction)	# Append to all transactions
 
-# Get names from first row in file
-# Remove from transaction list
-names = allTransactions.pop(0) # Pop off first element
+# Get names from first row in file, remove from list
+names = allTransactions.pop(0)
 
 # Create list of items with [ pays, to, amount ] for every combination
 payments = []
@@ -25,7 +35,7 @@ for n1 in names:
 
 # Analyze each transaction
 total = 0
-print("\n\n---Transactions:")
+print(colors.PURPLE + "\nTransactions:" + colors.END)
 for transaction in allTransactions:
 	item = transaction.pop(0)			# Get item from start of line
 	cost = float(transaction.pop(0))	# Get total cost from end of line
@@ -33,7 +43,7 @@ for transaction in allTransactions:
 	costPer = round(cost / people, 2)	# Get cost per person
 	owner = transaction.pop(0) 			# Get who paid
 
-	print(item + ", $" + str(cost))
+	print(item + ", " + colors.GREEN +"$"+ str(cost) + colors.END)
 	total += cost
 
 	# Loop through payments and add to cost
@@ -44,7 +54,7 @@ for transaction in allTransactions:
 					group[2] += costPer	# Add cost
 
 # Print total
-print("total: $"+str(total))
+print(colors.GREEN + colors.BOLD + "total: $"+str(total) + colors.END)
 
 # for payment in payments:
 # 	print(payment)
@@ -95,10 +105,9 @@ for g1 in payments:
 				g1[2] -= g2[2] 	# Subtract
 				g2[1] = g1[1]	# Switch pay-to
 
-# Print payments
-print("\n---Optimized:")
+print(colors.PURPLE + "\nResult:" + colors.END)
 for group in payments:
 	if group[2] != 0: # If not blank
-		print(group[0] + " pays " + group[1] + ": $" + str(round(group[2],2)))
+		print(group[0] + " pays " + group[1] + ": " + colors.GREEN + "$" + str(round(group[2],2)) + colors.END)
 
-# print("\n")
+print("") # Add space
