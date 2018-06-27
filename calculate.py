@@ -76,6 +76,12 @@ for g1 in payments:
 			# Remove empty duplicate
 			del payments[i]
 
+# Print who owes who (before optimizations)
+print(colors.PURPLE + "\nWho owes who:" + colors.END)
+for group in payments:
+	if group[2] != 0: # If not blank
+		print(group[0] + " owes " + group[1] + ": " + colors.GREEN + "$" + str(round(group[2],2)) + colors.END)
+
 # Optimize for tri-relationships
 # Where: X owes Y, Y owes Z, X owes Z
 for g1 in payments:
@@ -88,7 +94,6 @@ for g1 in payments:
 					g2[2] -= g1[2]		# Decrease payment
 					g3[2] += g1[2]		# Increase payment
 					g1[2] = 0			# Set to 0
-					# payments.remove(g1)	# Remove now-empty payment
 				
 				# If first cost more than second
 				if g1[2] >= g2[2]:
