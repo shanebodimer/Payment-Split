@@ -7,11 +7,8 @@ class colors:
     PURPLE = '\033[95m'
     BLUE = '\033[94m'
     GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    RED = '\033[91m'
     END = '\033[0m'
     BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
 
 # Get data from file and store in transactions array
 allTransactions = []
@@ -55,9 +52,6 @@ for transaction in allTransactions:
 
 # Print total
 print(colors.GREEN + colors.BOLD + "total: $"+str(total) + colors.END)
-
-# for payment in payments:
-# 	print(payment)
 
 # Settle between eachother
 # If X owes Y and Y owes X, settle
@@ -113,6 +107,6 @@ for g1 in payments:
 print(colors.PURPLE + "\nResult:" + colors.END)
 for group in payments:
 	if group[2] != 0: # If not blank
-		print(group[0] + " pays " + group[1] + ": " + colors.GREEN + "$" + str(round(group[2],2)) + colors.END)
+		print(colors.BLUE + group[0] + colors.END +" pays " + colors.BLUE + group[1] + colors.END + ": " + colors.GREEN + "$" + str(round(group[2],2)) + colors.END)
 
 print("") # Add space
