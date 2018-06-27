@@ -1,12 +1,9 @@
+# Get file name from first argument
 import sys
-
-# Store all transactions
-allTransactions = []
-
-# Get parameters
 fileName = sys.argv[1]
 
-# Get data
+# Get data from file and store in transactions array
+allTransactions = []
 with open(fileName,'r') as f:
 	for line in f:							# For each line in file
 		transaction = []					# Array to store transaction
@@ -16,10 +13,9 @@ with open(fileName,'r') as f:
 
 # Get names from first row in file
 # Remove from transaction list
-names = allTransactions.pop(0)
+names = allTransactions.pop(0) # Pop off first element
 
-# Create list of items with [ pays, to, amount ]
-# For every combination
+# Create list of items with [ pays, to, amount ] for every combination
 payments = []
 for n1 in names:
 	for n2 in names:
@@ -31,8 +27,8 @@ for n1 in names:
 total = 0
 print("\n\n---Transactions:")
 for transaction in allTransactions:
-	item = transaction.pop(0)			# Get item
-	cost = float(transaction.pop())		# Get total cost
+	item = transaction.pop(0)			# Get item from start of line
+	cost = float(transaction.pop(0))	# Get total cost from end of line
 	people = len(transaction) 			# Get number of people involved
 	costPer = round(cost / people, 2)	# Get cost per person
 	owner = transaction.pop(0) 			# Get who paid
@@ -50,27 +46,25 @@ for transaction in allTransactions:
 # Print total
 print("total: $"+str(total))
 
-# Settle between eachother
-# If x owes y and y owes x, settle
-for g1 in payments:
-	for g2 in payments:
-		if g1[0] == g2[1] and g1[1] == g2[0]:	# If owe eachother
-			g1[2] -= g2[2]						# Subtract 
-			payments.remove(g2)					# Remove duplicate
+# for payment in payments:
+# 	print(payment)
 
-			# Swap names
-			# If negative, switch order and payment
+# Settle between eachother
+# If X owes Y and Y owes X, settle
+for g1 in payments:
+	for i, g2 in enumerate(payments):
+		if g1[0] == g2[1] and g1[1] == g2[0]:	# If owe eachother
+			g1[2] -= g2[2]						# Subtract second from first 
+			
+			# If negative, switch name order and payment
 			if g1[2] < 0:
 				tempName = g1[1]
 				g1[1] = g1[0]
 				g1[0] = tempName
 				g1[2] = -g1[2]
 
-# Print payments
-print("\n---Pre-optimized:")
-for group in payments:
-	if group[2] != 0: # If not blank
-		print(group[0] + " pays " + group[1] + ": $" + str(group[2]))
+			# Remove empty duplicate
+			del payments[i]
 
 # Optimize for tri-relationships
 # Where: X owes Y, Y owes Z, X owes Z
@@ -93,7 +87,7 @@ for g1 in payments:
 					g2[2] = 0 		# Set to 0
 
 # Optimize for bi-relationships
-# Where: X owes Y and Z owes X
+# Where: X owes Y and Z owes X: Make Z pay Y
 for g1 in payments:
 	for g2 in payments:
 		if g1[0] == g2[1]:		# If payer in g1 is payee of g2
@@ -107,4 +101,4 @@ for group in payments:
 	if group[2] != 0: # If not blank
 		print(group[0] + " pays " + group[1] + ": $" + str(round(group[2],2)))
 
-print("\n")
+# print("\n")

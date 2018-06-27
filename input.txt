@@ -1,5 +1,5 @@
 shane maneesh cliff angelo
-ponce shane maneesh cliff angelo 60
-dinner cliff maneesh shane 260
-uber shane maneesh angelo cliff 25
-other cliff shane 60
+ponce 60 shane maneesh cliff angelo
+dinner 260 cliff maneesh shane 
+uber 25 shane maneesh angelo cliff 
+other 60 cliff shane
