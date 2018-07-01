@@ -1,7 +1,7 @@
 # PaymentSplit
 Splitting of group expenses with Python.
 
-## How to format your input.txt file.
+## How to format your input.txt file
 The first line should be the first names of all involved, seperated by a space.
 ~~~~
 shane maneesh cliff angelo
@@ -20,6 +20,11 @@ uber 25 shane angelo maneesh cliff
 If Cliff paid $260 for dinner that Maneesh and Shane also enjoyed, it would look like this:
 ~~~~
 dinner 260 cliff maneesh shane
+~~~~
+
+You can also comment lines using the tilde character
+~~~~
+~ This is a comment!
 ~~~~
 
 The file should be a .txt file. Look at `input.txt` for a complete input file example.

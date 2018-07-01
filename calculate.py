@@ -13,11 +13,12 @@ class colors:
 # Get data from file and store in transactions array
 allTransactions = []
 with open(fileName,'r') as f:
-	for line in f:							# For each line in file
-		transaction = []					# Array to store transaction
-		for word in line.split():			# Break down by word
-			transaction.append(word)		# Append to array
-		allTransactions.append(transaction)	# Append to all transactions
+		for line in f:								# For each line in file
+			if "~" != line[0]:						# If not a comment
+				transaction = []					# Array to store transaction
+				for word in line.split():			# Break down by word
+					transaction.append(word)		# Append to array
+				allTransactions.append(transaction)	# Append to all transactions
 
 # Get names from first row in file, remove from list
 names = allTransactions.pop(0)
