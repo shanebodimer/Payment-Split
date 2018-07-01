@@ -35,6 +35,16 @@ The file should be a .txt file. Look at `input.txt` for a complete input file ex
 python3 calculate.py input.txt
 ~~~~
 
+If you would like to round the values, pass it the following paramaters:
+- Nothing does not round
+- `r` to round normally
+- `ru` to round up
+- `rd` to round down
+
+To round up would look like this:
+~~~~
+python3 calculate.py input.txt ru
+~~~~
 
 ## Example input.txt
 ~~~~

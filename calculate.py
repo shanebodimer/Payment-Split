@@ -1,6 +1,12 @@
-# Get file name from first argument
 import sys
-fileName = sys.argv[1]
+import math
+
+# Parse arguments
+round_by = False				# No round by preference set
+if len(sys.argv) >= 2:			# Get file name from arguments
+	file_name = sys.argv[1]
+if len(sys.argv) == 3:			# Get rounding preference
+	round_by = sys.argv[2]
 
 # Colors for printing
 class colors:
@@ -11,17 +17,17 @@ class colors:
     BOLD = '\033[1m'
 
 # Get data from file and store in transactions array
-allTransactions = []
-with open(fileName,'r') as f:
+all_transactions = []
+with open(file_name,'r') as f:
 		for line in f:								# For each line in file
 			if "~" != line[0]:						# If not a comment
 				transaction = []					# Array to store transaction
 				for word in line.split():			# Break down by word
 					transaction.append(word)		# Append to array
-				allTransactions.append(transaction)	# Append to all transactions
+				all_transactions.append(transaction)	# Append to all transactions
 
 # Get names from first row in file, remove from list
-names = allTransactions.pop(0)
+names = all_transactions.pop(0)
 
 # Create list of items with [ pays, to, amount ] for every combination
 payments = []
@@ -31,10 +37,9 @@ for n1 in names:
 			group = [n1, n2, 0]		# [Pays, To, Amount]
 			payments.append(group)
 
-# Analyze each transaction
 total = 0
 print(colors.PURPLE + "\nTransactions:" + colors.END)
-for transaction in allTransactions:
+for transaction in all_transactions:	# Analyze each transaction
 	item = transaction.pop(0)			# Get item from start of line
 	cost = float(transaction.pop(0))	# Get total cost from end of line
 	people = len(transaction) 			# Get number of people involved
@@ -108,6 +113,18 @@ for g1 in payments:
 print(colors.PURPLE + "\nResult:" + colors.END)
 for group in payments:
 	if group[2] != 0: # If not blank
-		print(colors.BLUE + group[0] + colors.END +" pays " + colors.BLUE + group[1] + colors.END + ": " + colors.GREEN + "$" + str(round(group[2],2)) + colors.END)
+
+		# Round
+		amount = group[2]					# Get amount
+		if round_by == "r":					# Round regular
+			amount = round(group[2])
+		elif round_by == "ru":				# Round up
+			amount =  math.ceil(group[2])
+		elif round_by == "rd":				# Round down
+			amount = math.floor(group[2])
+		else:								# No round
+			amount = round(group[2],2)
+
+		print(colors.BLUE + group[0] + colors.END +" pays " + colors.BLUE + group[1] + colors.END + ": " + colors.GREEN + "$" + str(amount) + colors.END)
 
 print("") # Add space
