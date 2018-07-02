@@ -1,20 +1,20 @@
 import sys
 import math
 
-# Parse arguments
-round_by = False				# No round by preference set
-if len(sys.argv) >= 2:			# Get file name from arguments
-	file_name = sys.argv[1]
-if len(sys.argv) == 3:			# Get rounding preference
-	round_by = sys.argv[2]
-
-# Colors for printing
+# Colors for terminal printing
 class colors:
     PURPLE = '\033[95m'
     BLUE = '\033[94m'
     GREEN = '\033[92m'
     END = '\033[0m'
     BOLD = '\033[1m'
+
+# Parse arguments
+round_by = False				# No round by preference set
+if len(sys.argv) >= 2:			# Get file name from arguments
+	file_name = sys.argv[1]
+if len(sys.argv) == 3:			# Get rounding preference
+	round_by = sys.argv[2]
 
 # Get data from file and store in transactions array
 all_transactions = []
@@ -24,7 +24,7 @@ with open(file_name,'r') as f:
 				transaction = []					# Array to store transaction
 				for word in line.split():			# Break down by word
 					transaction.append(word)		# Append to array
-				all_transactions.append(transaction)	# Append to all transactions
+				all_transactions.append(transaction)# Append to all transactions
 
 # Get names from first row in file, remove from list
 names = all_transactions.pop(0)
@@ -33,7 +33,7 @@ names = all_transactions.pop(0)
 payments = []
 for n1 in names:
 	for n2 in names:
-		if n1 != n2:				# Exclude self
+		#if n1 != n2:				# Exclude self
 			group = [n1, n2, 0]		# [Pays, To, Amount]
 			payments.append(group)
 
@@ -42,9 +42,9 @@ print(colors.PURPLE + "\nTransactions:" + colors.END)
 for transaction in all_transactions:	# Analyze each transaction
 	item = transaction.pop(0)			# Get item from start of line
 	cost = float(transaction.pop(0))	# Get total cost from end of line
+	owner = transaction.pop(0) 			# Get who paid
 	people = len(transaction) 			# Get number of people involved
 	costPer = round(cost / people, 2)	# Get cost per person
-	owner = transaction.pop(0) 			# Get who paid
 
 	print(item + ", " + colors.GREEN +"$"+ str(cost) + colors.END)
 	total += cost
@@ -52,9 +52,9 @@ for transaction in all_transactions:	# Analyze each transaction
 	# Loop through payments and add to cost
 	for name in transaction:
 		for group in payments:
-				# Find [Pays, To, Amount] that matches
-				if group[0] == name and group[1] == owner:
-					group[2] += costPer	# Add cost
+			# Find [Pays, To, Amount] that matches and not itself
+			if group[0] == name and group[1] == owner and group[0] != group[1]:
+				group[2] += costPer		# Add cost
 
 # Print total
 print(colors.GREEN + colors.BOLD + "total: $"+str(total) + colors.END)
