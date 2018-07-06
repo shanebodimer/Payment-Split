@@ -46,7 +46,7 @@ for transaction in all_transactions:	# Analyze each transaction
 	people = len(transaction) 			# Get number of people involved
 	costPer = round(cost / people, 2)	# Get cost per person
 
-	print(item + ", " + colors.GREEN +"$"+ str(cost) + colors.END)
+	print(item + ", " + colors.GREEN +"$"+ str(cost) + colors.END + " (" + str(people) + ")")
 	total += cost
 
 	# Loop through payments and add to cost
