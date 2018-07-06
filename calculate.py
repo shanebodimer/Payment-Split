@@ -13,8 +13,10 @@ class colors:
 round_by = False				# No round by preference set
 if len(sys.argv) >= 2:			# Get file name from arguments
 	file_name = sys.argv[1]
-if len(sys.argv) == 3:			# Get rounding preference
+if len(sys.argv) >= 3:			# Get rounding preference
 	round_by = sys.argv[2]
+# if len(sys.argv) == 4:			# Get report
+# 	generate_report == sys.argv[3]
 
 # Get data from file and store in transactions array
 all_transactions = []
@@ -28,6 +30,14 @@ with open(file_name,'r') as f:
 
 # Get names from first row in file, remove from list
 names = all_transactions.pop(0)
+
+# Print names
+all_names = ""
+print(colors.PURPLE + "\n Participants:" + colors.END)
+for name in names:									# Build list of names
+	all_names += name + ", "
+all_names = all_names[:-2]							# Trim last trailing comma
+print(all_names)
 
 # Create list of items with [ pays, to, amount ] for every combination
 payments = []
