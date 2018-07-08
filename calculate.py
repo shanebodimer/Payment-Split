@@ -33,7 +33,7 @@ names = all_transactions.pop(0)
 
 # Print names
 all_names = ""
-print(colors.PURPLE + "\n Participants:" + colors.END)
+print(colors.PURPLE + "\nParticipants:" + colors.END)
 for name in names:									# Build list of names
 	all_names += name + ", "
 all_names = all_names[:-2]							# Trim last trailing comma
@@ -67,7 +67,8 @@ for transaction in all_transactions:	# Analyze each transaction
 				group[2] += costPer		# Add cost
 
 # Print total
-print(colors.GREEN + colors.BOLD + "total: $"+str(total) + colors.END)
+print(colors.GREEN + colors.BOLD + "total: $"+str(round(total,2)) + colors.END)
+print(colors.GREEN + colors.BOLD + "avg per person: $"+str(round(total/people,2)) + colors.END)
 
 # Settle between eachother
 # If X owes Y and Y owes X, settle
@@ -87,10 +88,10 @@ for g1 in payments:
 			del payments[i]
 
 # Print who owes who (before optimizations)
-print(colors.PURPLE + "\nWho owes who:" + colors.END)
-for group in payments:
-	if group[2] != 0: # If not blank
-		print(group[0] + " owes " + group[1] + ": " + colors.GREEN + "$" + str(round(group[2],2)) + colors.END)
+# print(colors.PURPLE + "\nWho owes who:" + colors.END)
+# for group in payments:
+# 	if group[2] != 0: # If not blank
+# 		print(group[0] + " owes " + group[1] + ": " + colors.GREEN + "$" + str(round(group[2],2)) + colors.END)
 
 # Optimize for tri-relationships
 # Where: X owes Y, Y owes Z, X owes Z
