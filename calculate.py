@@ -69,6 +69,7 @@ for transaction in all_transactions:	# Analyze each transaction
 # Print total
 print(colors.GREEN + colors.BOLD + "total: $"+str(round(total,2)) + colors.END)
 print(colors.GREEN + colors.BOLD + "avg per person: $"+str(round(total/people,2)) + colors.END)
+print(str(len(all_transactions)) + " total expenses")
 
 # Settle between eachother
 # If X owes Y and Y owes X, settle
